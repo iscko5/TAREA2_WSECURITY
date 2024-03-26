@@ -6,11 +6,6 @@ import openpyxl as px
 import PyPDF2 as pdf
 
 def wordMetadata(ruta):
-    # metadata = {}
-    # print(doc.core_properties)
-    # for prop in doc.core_properties:
-    #     metadata[prop] = getattr(doc.core_properties, prop)
-    # return metadata
     doc = Document(ruta)
     metadata = {}
     prop = doc.core_properties
@@ -37,9 +32,7 @@ def pdfMetadata(ruta):
 def excelMetadata(ruta):
     wb = px.load_workbook(ruta)
     metadata = {}
-    print(wb.properties)
-    for i in wb.properties:
-        metadata[i] = getattr(wb.properties, i)
+    metadata = dict(wb.properties.__dict__)
     
     return metadata
     
@@ -62,14 +55,17 @@ def main():
     for root, dirs, files in os.walk(opts.folder):
         for file in files:
             ruta = os.path.join(root,file)
+            # Explora archivos word
             if file.endswith('.docx'):
                 metadata = wordMetadata(ruta)
                 wordC += 1
                 typeF = '.docx'
+            # Explora archivos de excel
             elif file.endswith('.xlsx'):
                 metadata = excelMetadata(ruta)
                 excelC += 1
                 typeF = '.xlsx'
+            # Explora archivos pdf
             elif file.endswith('.pdf'):
                 metadata = pdfMetadata(ruta)
                 pdfC += 1
@@ -79,8 +75,9 @@ def main():
             print(f'Metadata del archivo con extensión {typeF} con ruta {ruta} = \n')
             for key, value in metadata.items():
                 print(f'{key}:{value}')
+            #print(metadata)
             print('---------------------------------')
-            print('Siguiente archivo...')
+            #print('Siguiente archivo...')
     
     print(f'La cuenta total de archivos en {opts.folder} es: ')
     print(f'''
@@ -90,5 +87,5 @@ def main():
           ''')
             
 if __name__ == '__main__':
-    main()               
+    main()      
         
