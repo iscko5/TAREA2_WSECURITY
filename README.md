@@ -1,7 +1,7 @@
 
 # Tarea 2: Metadata
 
-Tarea sobre el análisis de la metadata de archivos de tipo .docx, .xlsx y .pdf mediante Python para la materia Web Security con ALDAMA COAHUILA MARIO ALBERTO
+Tarea sobre el análisis de la metadata de archivos de tipo .docx, .xlsx y .pdf mediante Python para la materia Computer (Web) Security con ALDAMA COAHUILA MARIO ALBERTO
 
 
 ## Authors
